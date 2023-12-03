@@ -13,7 +13,7 @@ fun main() {
     // part 2
 
     val numbersAsMap = listOf("one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
-        .mapIndexed { index, numStr -> numStr to index + 1 }.toMap() +
+        .mapIndexed { index, numberAsWord -> numberAsWord to index + 1 }.toMap() +
             (1..9).associateBy { it.toString() }
 
     val regex = Regex(numbersAsMap.keys.joinToString("|"))

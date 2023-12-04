@@ -24,13 +24,13 @@ fun main() {
             }
             val winningNumbers = split[0]
             val numbersIHave = split[1]
-            val matchingNumbers = winningNumbers.intersect(numbersIHave)
+            val matchingNumbers = winningNumbers.intersect(numbersIHave).size
             cardNo to matchingNumbers
         }
 
         fun countCards(cardNo: Int): Int {
             val matchingNumbers = allCards[cardNo]!!
-            return 1 + (1..matchingNumbers.size).sumOf { countCards(cardNo + it) }
+            return 1 + (1..matchingNumbers).sumOf { countCards(cardNo + it) }
         }
 
         return allCards.keys.sumOf { cardNo ->

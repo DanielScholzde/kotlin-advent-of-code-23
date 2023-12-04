@@ -16,18 +16,12 @@ fun main() {
         .mapIndexed { index, numberAsWord -> numberAsWord to index + 1 }.toMap() +
             (1..9).associateBy { it.toString() }
 
-    val regex = Regex(numbersAsMap.keys.joinToString("|"))
+    val regexFirst = Regex(numbersAsMap.keys.joinToString("|"))
+    val regexLast = Regex(numbersAsMap.keys.joinToString("|") { it.reversed() })
 
     input.sumOf { row ->
-        val first = regex.find(row)!!.value
-
-        var last = "-"
-        var i = -1
-        do {
-            val matchResult = regex.find(row, i + 1) ?: break
-            last = matchResult.value
-            i = matchResult.range.first
-        } while (true)
+        val first = regexFirst.find(row)!!.value
+        val last = regexLast.find(row.reversed())!!.value.reversed()
 
         (numbersAsMap[first].toString() + numbersAsMap[last]).toInt()
 
